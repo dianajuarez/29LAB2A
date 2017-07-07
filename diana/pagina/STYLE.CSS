@@ -1,0 +1,4 @@
+var diana=angular.module("diana;[]");
+diana.controller("mensaje.function $scope"){
+	$scope.texto1="about";
+}

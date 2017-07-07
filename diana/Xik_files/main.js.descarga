@@ -1,0 +1,152 @@
+function myaffix() {
+    console.log("myaffix")
+    var affixoffset = $('.navbar').offset().top
+
+    var navHeight = $(".navbar").height();
+    console.log("affixoffset",affixoffset, "navHeight",navHeight)
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() <= affixoffset) {
+                document.body.style.paddingTop = "0px"
+                $('.navbar').removeClass('affix');
+        } else {
+                document.body.style.paddingTop = "50px"
+                $('.navbar').addClass('affix');
+        }
+    });
+
+};
+
+
+
+function scrollMenu(){
+    $(".scroll").on("click", function( e ) {
+        var href = $(e.target).attr('href');
+        var path = window.location.pathname;
+        var hash = window.location.hash;
+         if(href)
+            var target =  href.substr(href.indexOf("#"), href.length);
+         else
+            var target = "";
+
+         if((path != "/") && (href=="#clientes")){
+            document.location.href = "/#clientes";
+         }else if(path != "/" && href=="#start"){
+            document.location.href = "/";
+         }
+         if(target =="#scrum"){
+            // active class desktop
+            $("#btn-lg-scrum").addClass("active");
+            $("#btn-lg-dev").removeClass("active");
+            $("#btn-lg-testing").removeClass("active");
+
+            // active class movile
+            $("#btn-sm-scrum").addClass("active");
+            $("#btn-sm-dev").removeClass("active");
+            $("#btn-sm-testing").removeClass("active");
+
+            // close dropdown
+            $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+         }else if(target =="#testing-automation"){
+            // active class desktop
+            $("#btn-lg-testing").addClass("active");
+            $("#btn-lg-dev").removeClass("active");
+            $("#btn-lg-scrum").removeClass("active");
+
+            // active class movile
+            $("#btn-sm-testing").addClass("active");
+            $("#btn-sm-dev").removeClass("active");
+            $("#btn-sm-scrum").removeClass("active");
+
+            // close dropdown
+            $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+         }else if(target =="#dev"){
+            // active class desktop
+            $("#btn-lg-dev").addClass("active");
+            $("#btn-lg-scrum").removeClass("active");
+            $("#btn-lg-testing").removeClass("active");
+
+            // active class movile
+            $("#btn-sm-dev").addClass("active");
+            $("#btn-sm-scrum").removeClass("active");
+            $("#btn-sm-testing").removeClass("active");
+
+            // close dropdown
+            $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+         }
+
+        if($(target).offset()){
+           $("html, body").animate({
+               scrollTop: $(target).offset().top
+
+
+           }, 1300);
+        return false;
+      }
+   });
+
+
+       $('.close-click a').click(function () {
+    $('.navbar-collapse').collapse('hide');
+});
+
+};
+
+function activeClassNavMenu(){
+    var path = window.location.pathname;
+    var hash = window.location.hash;
+   $('nav a').parents('li, ul').removeClass('active');
+   if((path != "/") && (hash=="#clientes")){
+      document.location.href = "/#clientes";
+   }else if(path != "/" && hash=="#start"){
+      document.location.href = "/";
+   }
+   switch (path) {
+      case '/team':
+         // id del btn cuando esta en desktop
+        $('#id-btn-lg-team').addClass('active');
+         // id del btn cuando esta en movil
+        $('#id-btn-sm-team').addClass('active');
+        break;
+
+      case '/about-us':
+        $('#id-btn-lg-aboutus').addClass('active');
+        $('#id-btn-sm-aboutus').addClass('active');
+        break;
+
+      case '/services':
+         //$('#id-btn-lg-services').addClass('active');
+         //$('#id-btn-sm-services').addClass('active');
+         if(hash == "#scrum"){
+            $("#btn-lg-scrum").addClass("active");
+            $("#btn-sm-scrum").addClass("active");
+         }else if(hash == "#testing-automation"){
+           $("#btn-lg-testing").addClass("active");
+           $("#btn-sm-testing").addClass("active");
+         }else if(hash == "#dev"){
+           $("#btn-lg-dev").addClass("active");
+           $("#btn-sm-dev").addClass("active");
+         }
+         break;
+     default:
+  }
+
+}
+
+
+function shrink(){
+  $(document).ready(function(){
+  var scrollTop = 0;
+  $(window).scroll(function(){
+    scrollTop = $(window).scrollTop();
+
+    if (scrollTop >= 100) {
+      $('#global-nav').addClass('scrolled-nav');
+    } else if (scrollTop < 100) {
+      $('#global-nav').removeClass('scrolled-nav');
+    }
+
+  });
+
+});
+}
